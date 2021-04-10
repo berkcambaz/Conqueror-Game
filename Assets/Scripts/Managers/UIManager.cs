@@ -79,7 +79,8 @@ public class UIManager : MonoBehaviour
                 {
                     province.army.Occupy(ref province, tilePos, mousePos);
 
-                    // Display bottom panel with province
+                    // Update top panel and display bottom panel with province
+                    UpdateTopPanel();
                     DisplayPanelBottom();
                     DisableArmyMovementIndicator();
                 }
