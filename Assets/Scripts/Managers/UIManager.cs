@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
                 province = _province;
 
                 // Move army
-                GameplayManager.Instance.MoveArmy(ref province, tilePos, tilePosOld, mousePos, mousePosOld);
+                province.army.Move(ref province, tilePos, tilePosOld, mousePos, mousePosOld);
 
                 // Display bottom panel with province
                 DisplayPanelBottom();
@@ -96,8 +96,8 @@ public class UIManager : MonoBehaviour
 
     private void DisplayPanelBottom()
     {
-        actionMoveArmy.SetActive((int)GameplayManager.Instance.player.country.id == (int)province.armyID);
-        actionRecruitArmy.SetActive(GameplayManager.Instance.player.country.id == province.countryID && province.armyID == ArmyID.None && province.landmarkID == LandmarkID.House);
+        actionMoveArmy.SetActive((int)GameplayManager.Instance.player.country.id == (int)province.army.id);
+        actionRecruitArmy.SetActive(GameplayManager.Instance.player.country.id == province.country.id && province.army.id == ArmyID.None && province.landmarkID == LandmarkID.House);
         actionBuildChurch.SetActive(false);
         actionBuildHouse.SetActive(false);
         actionBuildTower.SetActive(false);

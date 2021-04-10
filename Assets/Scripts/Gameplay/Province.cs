@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Province
 {
-    public CountryID countryID;
-    public CountryID occupiedBycountryID;
+    public Country country;
+    public Country occupiedBycountry;
     public LandmarkID landmarkID;
-    public ArmyID armyID = ArmyID.None;
+    public Army army;
 
     public Province(CountryID _countryID, LandmarkID _landmarkID)
     {
-        countryID = (CountryID)((int)_countryID % (int)CountryID.Count);
-        occupiedBycountryID = (int)_countryID > (int)CountryID.Count - 1 ? (CountryID)((int)_countryID % (int)CountryID.Count) : CountryID.None;
+        country = new Country((CountryID)((int)_countryID % (int)CountryID.Count));
+        occupiedBycountry = new Country((int)_countryID > (int)CountryID.Count - 1 ? (CountryID)((int)_countryID % (int)CountryID.Count) : CountryID.None);
         landmarkID = _landmarkID;
+        army = new Army(ArmyID.None);
     }
 }

@@ -82,7 +82,7 @@ public class Map : MonoBehaviour
                     {
                         armyID = (ArmyID)(i % (int)ArmyID.Count);
                         Game.Instance.countries[(int)armyID].AddArmy();
-                        provinces[x + y * width].armyID = armyID;
+                        provinces[x + y * width].army.id = armyID;
                         break;
                     }
                 }
@@ -106,7 +106,7 @@ public class Map : MonoBehaviour
 
         try
         {
-            if (provinces[tilePos.x + tilePos.y * width].countryID != CountryID.None)
+            if (provinces[tilePos.x + tilePos.y * width].country.id != CountryID.None)
             {
                 UIManager.Instance.EnablePanelBottom(provinces[tilePos.x + tilePos.y * width], mousePos, tilePos);
                 UIManager.Instance.tileShadow.transform.position = new Vector3(mousePos.x, mousePos.y, 0f);
