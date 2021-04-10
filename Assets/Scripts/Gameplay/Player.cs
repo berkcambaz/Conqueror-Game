@@ -13,20 +13,20 @@ public class Player
         switch (country.id)
         {
             case CountryID.Green:
-                UIManager.Instance.imageMoveArmy.sprite = SpriteManager.Instance.armyGreen;
-                UIManager.Instance.imageRecruitArmy.sprite = SpriteManager.Instance.armyGreen;
+                for (int i = 0; i < UIManager.Instance.imageArmy.Length; ++i)
+                    UIManager.Instance.imageArmy[i].sprite = SpriteManager.Instance.armyGreen;
                 break;
             case CountryID.Purple:
-                UIManager.Instance.imageMoveArmy.sprite = SpriteManager.Instance.armyPurple;
-                UIManager.Instance.imageRecruitArmy.sprite = SpriteManager.Instance.armyPurple;
+                for (int i = 0; i < UIManager.Instance.imageArmy.Length; ++i)
+                    UIManager.Instance.imageArmy[i].sprite = SpriteManager.Instance.armyPurple;
                 break;
             case CountryID.Red:
-                UIManager.Instance.imageMoveArmy.sprite = SpriteManager.Instance.armyRed;
-                UIManager.Instance.imageRecruitArmy.sprite = SpriteManager.Instance.armyRed;
+                for (int i = 0; i < UIManager.Instance.imageArmy.Length; ++i)
+                    UIManager.Instance.imageArmy[i].sprite = SpriteManager.Instance.armyRed;
                 break;
             case CountryID.Yellow:
-                UIManager.Instance.imageMoveArmy.sprite = SpriteManager.Instance.armyYellow;
-                UIManager.Instance.imageRecruitArmy.sprite = SpriteManager.Instance.armyYellow;
+                for (int i = 0; i < UIManager.Instance.imageArmy.Length; ++i)
+                    UIManager.Instance.imageArmy[i].sprite = SpriteManager.Instance.armyYellow;
                 break;
         }
     }

@@ -16,18 +16,22 @@ public class UIManager : MonoBehaviour
     public GameObject tileSelect;
     public GameObject tileShadow;
 
+    public GameObject panelTop;
+    public RectTransform rectTransformPanelTop;
+    private Vector2 panelTopAnchoredPosition;
+    private bool panelTopOpened = false;
+
     public GameObject panelBottom;
     public Text textProvince;
     public Text textLandmark;
     public Text textArmy;
     public GameObject actionMoveArmy;
-    public Image imageMoveArmy;
     public GameObject actionRecruitArmy;
-    public Image imageRecruitArmy;
     public GameObject actionBuildChurch;
     public GameObject actionBuildHouse;
     public GameObject actionBuildTower;
     public GameObject actionDemolish;
+    public Image[] imageArmy;
 
     private Province province;
     private Vector2Int mousePos;
@@ -38,6 +42,8 @@ public class UIManager : MonoBehaviour
     public void Init()
     {
         Instance = this;
+
+        panelTopAnchoredPosition = rectTransformPanelTop.anchoredPosition;
     }
 
     public void EnablePanelBottom(Province _province, Vector2Int _mousePos, Vector2Int _tilePos)
@@ -59,7 +65,7 @@ public class UIManager : MonoBehaviour
 
             // Display bottom panel with province
             DisplayPanelBottom();
-        }       
+        }
         else    // If panel was already activated
         {
             if (province == _province)  // If clicked to the same province, close the panel
@@ -120,5 +126,28 @@ public class UIManager : MonoBehaviour
         armyMovementIndicatorDown.SetActive(false);
         armyMovementIndicatorLeft.SetActive(false);
         armyMovementIndicatorRight.SetActive(false);
+    }
+
+    public void ButtonTogglePanelTop()
+    {
+        panelTopOpened = !panelTopOpened;
+
+        StopCoroutine("TogglePanelTop");
+        StartCoroutine("TogglePanelTop");
+    }
+
+    private IEnumerator TogglePanelTop()
+    {
+        Vector2 position;
+        if (panelTopOpened)
+            position = Vector2.zero;
+        else
+            position = panelTopAnchoredPosition;
+
+        while (rectTransformPanelTop.anchoredPosition != position)
+        {
+            rectTransformPanelTop.anchoredPosition = Vector2.Lerp(rectTransformPanelTop.anchoredPosition, position, Time.deltaTime * 5f);
+            yield return null;
+        }
     }
 }
