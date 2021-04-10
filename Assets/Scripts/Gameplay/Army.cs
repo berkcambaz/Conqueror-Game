@@ -75,8 +75,9 @@ public class Army
             }
             else
             {
-                _province.occupiedBycountry.id = CountryID.None;
-                _province.country.id = (CountryID)_province.army.id;
+                ArmyID armyId = _province.army.id;
+                _province = new Province(ref Game.Instance.countries[(int)_province.army.id], _province.landmark.id);
+                _province.army.id = armyId;
 
                 Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id]);
             }

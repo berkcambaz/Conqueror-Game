@@ -12,7 +12,7 @@ public class Province
     public Province(ref Country _country, LandmarkID _landmarkID)
     {
         country = _country;
-        occupiedBycountry = new Country((int)_country.id > (int)CountryID.Count - 1 ? (CountryID)((int)_country.id % (int)CountryID.Count) : CountryID.None);
+        occupiedBycountry = new Country(CountryID.None);
         landmark = new Landmark(_landmarkID);
         army = new Army(ArmyID.None);
     }
