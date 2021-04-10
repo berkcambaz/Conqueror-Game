@@ -15,10 +15,10 @@ public class Army
         {
             Vector2Int diff = _tilePos - _tilePosOld;
             ref Province oldProvince = ref Game.Instance.map.provinces[_tilePosOld.x + _tilePosOld.y * Game.Instance.map.width];
-            if (diff.x == 1 && UIManager.Instance.armyMovementIndicatorRight.activeSelf
-                || diff.x == -1 && UIManager.Instance.armyMovementIndicatorLeft.activeSelf
-                || diff.y == 1 && UIManager.Instance.armyMovementIndicatorUp.activeSelf
-                || diff.y == -1 && UIManager.Instance.armyMovementIndicatorDown.activeSelf)
+            if (diff.x == 1 && diff.y == 0 && UIManager.Instance.armyMovementIndicatorRight.activeSelf
+                || diff.x == -1 && diff.y == 0 && UIManager.Instance.armyMovementIndicatorLeft.activeSelf
+                || diff.x == 0 && diff.y == 1 && UIManager.Instance.armyMovementIndicatorUp.activeSelf
+                || diff.x == 0 && diff.y == -1 && UIManager.Instance.armyMovementIndicatorDown.activeSelf)
             {
                 if ((int)oldProvince.army.id == (int)GameplayManager.Instance.player.country.id)
                 {
