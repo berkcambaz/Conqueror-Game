@@ -113,7 +113,7 @@ public class UIManager : MonoBehaviour
     private void DisplayPanelBottom()
     {
         actionMoveArmy.SetActive((int)GameplayManager.Instance.player.country.id == (int)province.army.id);
-        actionRecruitArmy.SetActive(GameplayManager.Instance.player.country.id == province.country.id && province.army.id == ArmyID.None && province.landmark.id == LandmarkID.House);
+        actionRecruitArmy.SetActive(GameplayManager.Instance.player.country.id == province.countryID && province.army.id == ArmyID.None && province.landmark.id == LandmarkID.House);
         actionBuildChurch.SetActive(false);
         actionBuildHouse.SetActive(false);
         actionBuildTower.SetActive(false);
@@ -179,7 +179,7 @@ public class UIManager : MonoBehaviour
 
     public void ButtonRecruitArmy()
     {
-        bool armyPurchased = province.country.BuyArmy(ref province, mousePos);
+        bool armyPurchased = Game.Instance.countries[(int)province.countryID].BuyArmy(ref province, mousePos);
         if (armyPurchased)
         {
             UpdateTopPanel();
@@ -189,7 +189,7 @@ public class UIManager : MonoBehaviour
 
     public void ButtonBuildChurch()
     {
-        bool churchPurchased = province.country.BuyLandmark(LandmarkID.Church, ref province, mousePos);
+        bool churchPurchased = Game.Instance.countries[(int)province.countryID].BuyLandmark(LandmarkID.Church, ref province, mousePos);
         if (churchPurchased)
         {
             UpdateTopPanel();
@@ -199,7 +199,7 @@ public class UIManager : MonoBehaviour
 
     public void ButtonBuildHouse()
     {
-        bool housePurchased = province.country.BuyLandmark(LandmarkID.House, ref province, mousePos);
+        bool housePurchased = Game.Instance.countries[(int)province.countryID].BuyLandmark(LandmarkID.House, ref province, mousePos);
         if (housePurchased)
         {
             UpdateTopPanel();
@@ -209,7 +209,7 @@ public class UIManager : MonoBehaviour
 
     public void ButtonBuildTower()
     {
-        bool towerPurchased = province.country.BuyLandmark(LandmarkID.Tower, ref province, mousePos);
+        bool towerPurchased = Game.Instance.countries[(int)province.countryID].BuyLandmark(LandmarkID.Tower, ref province, mousePos);
         if (towerPurchased)
         {
             UpdateTopPanel();
@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
         // If land is not occupied by other countries, demolish the landmark
         if (province.occupiedBycountry.id == CountryID.None)
         {
-            province.country.RemoveLandmark(ref province, mousePos);
+            Game.Instance.countries[(int)province.countryID].RemoveLandmark(ref province, mousePos);
             UpdateTopPanel();
             DisplayPanelBottom();
         }

@@ -18,7 +18,7 @@ public class GameplayManager : MonoBehaviour
     {
         string text = "";
 
-        switch (_province.country.id)
+        switch (_province.countryID)
         {
             case CountryID.Green:
                 text += "Green's Province";
@@ -62,7 +62,7 @@ public class GameplayManager : MonoBehaviour
             case LandmarkID.None:
                 text = "- No Landmark";
 
-                if (player.country.id == _province.country.id)
+                if (player.country.id == _province.countryID)
                 {
                     UIManager.Instance.actionBuildChurch.SetActive(true);
                     UIManager.Instance.actionBuildHouse.SetActive(true);
@@ -74,7 +74,7 @@ public class GameplayManager : MonoBehaviour
                 break;
             case LandmarkID.Church:
                 text = "- Church";
-                if (player.country.id == _province.country.id)
+                if (player.country.id == _province.countryID)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
@@ -84,7 +84,7 @@ public class GameplayManager : MonoBehaviour
                 break;
             case LandmarkID.House:
                 text = "- House";
-                if (player.country.id == _province.country.id)
+                if (player.country.id == _province.countryID)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
@@ -94,7 +94,7 @@ public class GameplayManager : MonoBehaviour
                 break;
             case LandmarkID.Tower:
                 text = "- Tower";
-                if (player.country.id == _province.country.id)
+                if (player.country.id == _province.countryID)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
@@ -133,7 +133,7 @@ public class GameplayManager : MonoBehaviour
     public bool ShowArmyMovementIndicatorCenter(Vector2Int _tilePos)
     {
         Province centerProvince = Game.Instance.map.provinces[_tilePos.x + _tilePos.y * Game.Instance.map.width];
-        bool show = centerProvince.country.id != player.country.id && (int)centerProvince.army.id == (int)player.country.id;
+        bool show = centerProvince.countryID != player.country.id && (int)centerProvince.army.id == (int)player.country.id;
         return show;
     }
 
@@ -143,7 +143,7 @@ public class GameplayManager : MonoBehaviour
         try
         {
             Province upProvince = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y + 1) * Game.Instance.map.width];
-            bool show = upProvince.country.id != CountryID.None && (int)upProvince.army.id != (int)player.country.id;
+            bool show = upProvince.countryID != CountryID.None && (int)upProvince.army.id != (int)player.country.id;
             return show;
         }
         catch (Exception)
@@ -158,7 +158,7 @@ public class GameplayManager : MonoBehaviour
         try
         {
             Province downProvince = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y - 1) * Game.Instance.map.width];
-            bool show = downProvince.country.id != CountryID.None && (int)downProvince.army.id != (int)player.country.id;
+            bool show = downProvince.countryID != CountryID.None && (int)downProvince.army.id != (int)player.country.id;
             return show;
         }
         catch (Exception)
@@ -173,7 +173,7 @@ public class GameplayManager : MonoBehaviour
         try
         {
             Province leftProvince = Game.Instance.map.provinces[_tilePos.x - 1 + _tilePos.y * Game.Instance.map.width];
-            bool show = leftProvince.country.id != CountryID.None && (int)leftProvince.army.id != (int)player.country.id;
+            bool show = leftProvince.countryID != CountryID.None && (int)leftProvince.army.id != (int)player.country.id;
             return show;
         }
         catch (Exception)
@@ -188,7 +188,7 @@ public class GameplayManager : MonoBehaviour
         try
         {
             Province rightProvince = Game.Instance.map.provinces[_tilePos.x + 1 + _tilePos.y * Game.Instance.map.width];
-            bool show = rightProvince.country.id != CountryID.None && (int)rightProvince.army.id != (int)player.country.id;
+            bool show = rightProvince.countryID != CountryID.None && (int)rightProvince.army.id != (int)player.country.id;
             return show;
         }
         catch (Exception)

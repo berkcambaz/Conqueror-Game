@@ -76,8 +76,8 @@ public class Army
             else
             {
                 ArmyID armyId = _province.army.id;
-                _province = new Province(ref Game.Instance.countries[(int)_province.army.id], _province.landmark.id);
-                _province.army.id = armyId;
+                _province.countryID = (CountryID)armyId;
+                _province.occupiedBycountry.id = CountryID.None;
 
                 Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id]);
             }
@@ -88,7 +88,7 @@ public class Army
 
     private int GetArmyBonus(Province _province, Province _oldProvince, Vector2Int _tilePos)
     {
-        ArmyID enemyId = (ArmyID)_province.country.id;
+        ArmyID enemyId = (ArmyID)_province.countryID;
         ArmyID allyId = _oldProvince.army.id;
         ArmyID landArmyId = ArmyID.None;
         int bonus = 0;

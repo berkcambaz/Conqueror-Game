@@ -66,7 +66,7 @@ public class Map : MonoBehaviour
                 }
 
                 if (countryID != CountryID.None)
-                    provinces[x + y * width] = new Province(ref Game.Instance.countries[(int)countryID], landmarkID);
+                    provinces[x + y * width] = new Province(countryID, landmarkID);
             }
         }
 
@@ -107,7 +107,7 @@ public class Map : MonoBehaviour
 
         try
         {
-            if (provinces[tilePos.x + tilePos.y * width].country.id != CountryID.None)
+            if (provinces[tilePos.x + tilePos.y * width].countryID != CountryID.None)
             {
                 UIManager.Instance.EnablePanelBottom(provinces[tilePos.x + tilePos.y * width], mousePos, tilePos);
                 UIManager.Instance.tileShadow.transform.position = new Vector3(mousePos.x, mousePos.y, 0f);

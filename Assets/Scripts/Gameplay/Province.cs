@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Province
 {
-    public Country country;
+    public CountryID countryID;
     public Country occupiedBycountry;
     public Landmark landmark;
     public Army army;
 
-    public Province(ref Country _country, LandmarkID _landmarkID)
+    public Province(CountryID _countryID, LandmarkID _landmarkID)
     {
-        country = _country;
+        countryID = _countryID;
         occupiedBycountry = new Country(CountryID.None);
         landmark = new Landmark(_landmarkID);
         army = new Army(ArmyID.None);
