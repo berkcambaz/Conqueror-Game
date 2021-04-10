@@ -130,12 +130,19 @@ public class GameplayManager : MonoBehaviour
         return text;
     }
 
+    public bool ShowArmyMovementIndicatorCenter(Vector2Int _tilePos)
+    {
+        Province centerProvince = Game.Instance.map.provinces[_tilePos.x + _tilePos.y * Game.Instance.map.width];
+        bool show = centerProvince.country.id != player.country.id && (int)centerProvince.army.id == (int)player.country.id;
+        return show;
+    }
+
     public bool ShowArmyMovementIndicatorUp(Vector2Int _tilePos)
     {
         // Try to check if there is a land in the up direction, if it error's, there is not
         try
         {
-            Province upProvince = Game.Instance.map.provinces[_tilePos.x + _tilePos.y * Game.Instance.map.width + Game.Instance.map.width];
+            Province upProvince = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y + 1) * Game.Instance.map.width];
             bool show = upProvince.country.id != CountryID.None && (int)upProvince.army.id != (int)player.country.id;
             return show;
         }
@@ -150,7 +157,7 @@ public class GameplayManager : MonoBehaviour
         // Try to check if there is a land in the down direction, if it error's, there is not
         try
         {
-            Province downProvince = Game.Instance.map.provinces[_tilePos.x + _tilePos.y * Game.Instance.map.width - Game.Instance.map.width];
+            Province downProvince = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y - 1) * Game.Instance.map.width];
             bool show = downProvince.country.id != CountryID.None && (int)downProvince.army.id != (int)player.country.id;
             return show;
         }
@@ -165,7 +172,7 @@ public class GameplayManager : MonoBehaviour
         // Try to check if there is a land in the left direction, if it error's, there is not
         try
         {
-            Province leftProvince = Game.Instance.map.provinces[_tilePos.x + _tilePos.y * Game.Instance.map.width - 1];
+            Province leftProvince = Game.Instance.map.provinces[_tilePos.x - 1 + _tilePos.y * Game.Instance.map.width];
             bool show = leftProvince.country.id != CountryID.None && (int)leftProvince.army.id != (int)player.country.id;
             return show;
         }
@@ -180,7 +187,7 @@ public class GameplayManager : MonoBehaviour
         // Try to check if there is a land in the left direction, if it error's, there is not
         try
         {
-            Province rightProvince = Game.Instance.map.provinces[_tilePos.x + _tilePos.y * Game.Instance.map.width + 1];
+            Province rightProvince = Game.Instance.map.provinces[_tilePos.x + 1 + _tilePos.y * Game.Instance.map.width];
             bool show = rightProvince.country.id != CountryID.None && (int)rightProvince.army.id != (int)player.country.id;
             return show;
         }

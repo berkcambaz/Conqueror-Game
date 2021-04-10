@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject armyMovementIndicator;
+    public GameObject armyMovementIndicatorCenter;
     public GameObject armyMovementIndicatorUp;
     public GameObject armyMovementIndicatorDown;
     public GameObject armyMovementIndicatorLeft;
@@ -72,9 +73,20 @@ public class UIManager : MonoBehaviour
         }
         else    // If panel was already activated
         {
-            if (province == _province)  // If clicked to the same province, close the panel
+            if (province == _province)  // If clicked to the same province
             {
-                DisablePanelBottom();
+                if (armyMovementIndicatorCenter.activeSelf) // If center indicator was active, occupy the province
+                {
+                    province.army.Occupy(ref province, tilePos);
+                    
+                    // Display bottom panel with province
+                    DisplayPanelBottom();
+                    DisableArmyMovementIndicator();
+                }
+                else    // Else, close the bottom panel
+                {
+                    DisablePanelBottom();
+                }
             }
             else    // If clicked to different province while panel was empty, update the panel
             {
@@ -117,6 +129,7 @@ public class UIManager : MonoBehaviour
         armyMovementIndicator.transform.position = new Vector3(mousePos.x, mousePos.y, 0f);
         armyMovementIndicator.SetActive(!armyMovementIndicator.activeSelf);
 
+        armyMovementIndicatorCenter.SetActive(GameplayManager.Instance.ShowArmyMovementIndicatorCenter(tilePos));
         armyMovementIndicatorUp.SetActive(GameplayManager.Instance.ShowArmyMovementIndicatorUp(tilePos));
         armyMovementIndicatorDown.SetActive(GameplayManager.Instance.ShowArmyMovementIndicatorDown(tilePos));
         armyMovementIndicatorLeft.SetActive(GameplayManager.Instance.ShowArmyMovementIndicatorLeft(tilePos));
