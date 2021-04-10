@@ -64,7 +64,7 @@ public class Country
         ++armyCount;
     }
 
-    public void BuyArmy(int _x, int _y)
+    public void BuyArmy(Province _province, Vector2Int _mousePos)
     {
         if (manpower >= armyCount + 1 && gold >= 2)
         {

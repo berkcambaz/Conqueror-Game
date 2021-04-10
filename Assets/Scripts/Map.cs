@@ -65,8 +65,8 @@ public class Map : MonoBehaviour
                     }
                 }
 
-
-                provinces[x + y * width] = new Province(countryID, landmarkID);
+                if (countryID != CountryID.None)
+                    provinces[x + y * width] = new Province(ref Game.Instance.countries[(int)countryID], landmarkID);
             }
         }
 

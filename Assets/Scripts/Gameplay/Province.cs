@@ -9,10 +9,10 @@ public class Province
     public Landmark landmark;
     public Army army;
 
-    public Province(CountryID _countryID, LandmarkID _landmarkID)
+    public Province(ref Country _country, LandmarkID _landmarkID)
     {
-        country = new Country((CountryID)((int)_countryID % (int)CountryID.Count));
-        occupiedBycountry = new Country((int)_countryID > (int)CountryID.Count - 1 ? (CountryID)((int)_countryID % (int)CountryID.Count) : CountryID.None);
+        country = _country;
+        occupiedBycountry = new Country((int)_country.id > (int)CountryID.Count - 1 ? (CountryID)((int)_country.id % (int)CountryID.Count) : CountryID.None);
         landmark = new Landmark(_landmarkID);
         army = new Army(ArmyID.None);
     }
