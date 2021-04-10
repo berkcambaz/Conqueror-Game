@@ -56,22 +56,38 @@ public class Army
         }
     }
 
-    public void Occupy(ref Province _province, Vector2Int _tilePos)
+    public void Occupy(ref Province _province, Vector2Int _tilePos, Vector2Int _mousePos)
     {
-        // Subtract 1 to exclude attacker army
-        int roll = Dice.Roll() - 1;
+        int roll = Dice.Roll();
 
         // Add bonuses and penalties to the roll
         roll += GetArmyBonus(_province, _province, _tilePos);
         roll += _province.landmark.GetBonus(true);
         roll += _province.landmark.GetPenalty(true);
 
+        if (roll > 5)
+        {
+            if (_province.occupiedBycountry.id != (CountryID)_province.army.id)
+            {
+                _province.occupiedBycountry.id = (CountryID)_province.army.id;
+
+                Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id + (int)ArmyID.Count]);
+            }
+            else
+            {
+                _province.occupiedBycountry.id = CountryID.None;
+                _province.country.id = (CountryID)_province.army.id;
+
+                Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id]);
+            }
+        }
+
         Debug.Log("Occupy roll: " + roll);
     }
 
     private int GetArmyBonus(Province _province, Province _oldProvince, Vector2Int _tilePos)
     {
-        ArmyID enemyId = _province.army.id;
+        ArmyID enemyId = (ArmyID)_province.country.id;
         ArmyID allyId = _oldProvince.army.id;
         ArmyID landArmyId = ArmyID.None;
         int bonus = 0;

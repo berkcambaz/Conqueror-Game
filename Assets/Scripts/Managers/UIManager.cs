@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
             {
                 if (armyMovementIndicatorCenter.activeSelf) // If center indicator was active, occupy the province
                 {
-                    province.army.Occupy(ref province, tilePos);
+                    province.army.Occupy(ref province, tilePos, mousePos);
                     
                     // Display bottom panel with province
                     DisplayPanelBottom();
@@ -139,6 +139,7 @@ public class UIManager : MonoBehaviour
     public void DisableArmyMovementIndicator()
     {
         armyMovementIndicator.SetActive(false);
+        armyMovementIndicatorCenter.SetActive(false);
         armyMovementIndicatorUp.SetActive(false);
         armyMovementIndicatorDown.SetActive(false);
         armyMovementIndicatorLeft.SetActive(false);
