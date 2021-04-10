@@ -130,7 +130,13 @@ public class Army
                                 break;
                         }
 
-                        Debug.Log(roll);
+                        // If roll is higher than 5, clear the target province's army, and move ally army to target province
+                        if (roll > 5)
+                        {
+                            _province.army.id = ArmyID.None;
+                            Move(ref _province, _tilePos, _tilePosOld, _mousePos, _mousePosOld);
+                        }
+
                     }
                 }
             }
