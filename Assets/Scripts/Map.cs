@@ -90,7 +90,7 @@ public class Map : MonoBehaviour
         }
 
         // Initialize player as green country and update top panel after initializing player with a country
-        GameplayManager.Instance.player = new Player(Game.Instance.countries[(int)CountryID.Yellow]);
+        GameplayManager.Instance.player = new Player(Game.Instance.countries[(int)CountryID.Red]);
         UIManager.Instance.UpdateTopPanel();
     }
 

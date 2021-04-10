@@ -179,42 +179,52 @@ public class UIManager : MonoBehaviour
 
     public void ButtonRecruitArmy()
     {
-        UpdateTopPanel();
+        bool armyPurchased = province.country.BuyArmy(ref province, mousePos);
+        if (armyPurchased)
+        {
+            UpdateTopPanel();
+            DisplayPanelBottom();
+        }
     }
 
     public void ButtonBuildChurch()
     {
-        UpdateTopPanel();
+        bool churchPurchased = province.country.BuyLandmark(LandmarkID.Church, ref province, mousePos);
+        if (churchPurchased)
+        {
+            UpdateTopPanel();
+            DisplayPanelBottom();
+        }
     }
 
     public void ButtonBuildHouse()
     {
-        UpdateTopPanel();
+        bool housePurchased = province.country.BuyLandmark(LandmarkID.House, ref province, mousePos);
+        if (housePurchased)
+        {
+            UpdateTopPanel();
+            DisplayPanelBottom();
+        }
     }
 
     public void ButtonBuildTower()
     {
-        UpdateTopPanel();
+        bool towerPurchased = province.country.BuyLandmark(LandmarkID.Tower, ref province, mousePos);
+        if (towerPurchased)
+        {
+            UpdateTopPanel();
+            DisplayPanelBottom();
+        }
     }
 
     public void ButtonDemolish()
     {
-        switch (province.landmark.id)
+        // If land is not occupied by other countries, demolish the landmark
+        if (province.occupiedBycountry.id == CountryID.None)
         {
-            case LandmarkID.Capital:
-                break;
-            case LandmarkID.Church:
-                break;
-            case LandmarkID.Forest:
-                break;
-            case LandmarkID.House:
-                break;
-            case LandmarkID.Mountains:
-                break;
-            case LandmarkID.Tower:
-                break;
-            default:
-                break;
+            province.country.RemoveLandmark(ref province, mousePos);
+            UpdateTopPanel();
+            DisplayPanelBottom();
         }
     }
 }
