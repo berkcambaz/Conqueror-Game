@@ -42,65 +42,65 @@ public class Army
                         int roll = Dice.Roll() - 1;
 
                         // Add army bonuses
-                        if (!(_tilePosOld.x + 1 > Game.Instance.map.width - 1))
+                        if (!(_tilePos.x + 1 > Game.Instance.map.width - 1))
                         {
-                            landArmyId = Game.Instance.map.provinces[(_tilePosOld.x + 1) + _tilePosOld.y * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[(_tilePos.x + 1) + _tilePos.y * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
                                 roll += 1;
                         }
-                        if (!(_tilePosOld.x - 1 < 0))
+                        if (!(_tilePos.x - 1 < 0))
                         {
-                            landArmyId = Game.Instance.map.provinces[(_tilePosOld.x - 1) + _tilePosOld.y * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[(_tilePos.x - 1) + _tilePos.y * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
                                 roll += 1;
                         }
-                        if (!(_tilePosOld.y + 1 > Game.Instance.map.height - 1))
+                        if (!(_tilePos.y + 1 > Game.Instance.map.height - 1))
                         {
-                            landArmyId = Game.Instance.map.provinces[_tilePosOld.x + (_tilePosOld.y + 1) * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y + 1) * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
                                 roll += 1;
                         }
-                        if (!(_tilePosOld.y - 1 < 0))
+                        if (!(_tilePos.y - 1 < 0))
                         {
-                            landArmyId = Game.Instance.map.provinces[_tilePosOld.x + (_tilePosOld.y - 1) * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y - 1) * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
                                 roll += 1;
                         }
-                        if (!(_tilePosOld.x + 1 > Game.Instance.map.width - 1) && !(_tilePosOld.y + 1 > Game.Instance.map.height - 1))
+                        if (!(_tilePos.x + 1 > Game.Instance.map.width - 1) && !(_tilePos.y + 1 > Game.Instance.map.height - 1))
                         {
-                            landArmyId = Game.Instance.map.provinces[(_tilePosOld.x + 1) + (_tilePosOld.y + 1) * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[(_tilePos.x + 1) + (_tilePos.y + 1) * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
                                 roll += 1;
                         }
-                        if (!(_tilePosOld.x - 1 < 0) && !(_tilePosOld.y + 1 > Game.Instance.map.height - 1))
+                        if (!(_tilePos.x - 1 < 0) && !(_tilePos.y + 1 > Game.Instance.map.height - 1))
                         {
-                            landArmyId = Game.Instance.map.provinces[(_tilePosOld.x - 1) + (_tilePosOld.y + 1) * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[(_tilePos.x - 1) + (_tilePos.y + 1) * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
                                 roll += 1;
                         }
-                        if (!(_tilePosOld.x + 1 > Game.Instance.map.width - 1) && !(_tilePosOld.y - 1 < 0))
+                        if (!(_tilePos.x + 1 > Game.Instance.map.width - 1) && !(_tilePos.y - 1 < 0))
                         {
-                            landArmyId = Game.Instance.map.provinces[(_tilePosOld.x + 1) + (_tilePosOld.y - 1) * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[(_tilePos.x + 1) + (_tilePos.y - 1) * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
                                 roll += 1;
                         }
-                        if (!(_tilePosOld.x - 1 < 0) && !(_tilePosOld.y - 1 < 0))
+                        if (!(_tilePos.x - 1 < 0) && !(_tilePos.y - 1 < 0))
                         {
-                            landArmyId = Game.Instance.map.provinces[(_tilePosOld.x - 1) + (_tilePosOld.y - 1) * Game.Instance.map.width].army.id;
+                            landArmyId = Game.Instance.map.provinces[(_tilePos.x - 1) + (_tilePos.y - 1) * Game.Instance.map.width].army.id;
                             if (landArmyId == enemyId)
                                 roll += -1;
                             else if (landArmyId == allyId)
