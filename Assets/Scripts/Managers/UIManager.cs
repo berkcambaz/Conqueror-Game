@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     public GameObject tileShadow;
 
     public GameObject panelTop;
+    public Text textGold;
+    public Text textGoldEarned;
+    public Text textArmyCount;
+    public Text textManpower;
     public RectTransform rectTransformPanelTop;
     private Vector2 panelTopAnchoredPosition;
     private bool panelTopOpened = false;
@@ -149,5 +153,13 @@ public class UIManager : MonoBehaviour
             rectTransformPanelTop.anchoredPosition = Vector2.Lerp(rectTransformPanelTop.anchoredPosition, position, Time.deltaTime * 5f);
             yield return null;
         }
+    }
+
+    public void UpdateTopPanel()
+    {
+        textGold.text = GameplayManager.Instance.player.country.gold.ToString();
+        textGoldEarned.text = GameplayManager.Instance.player.country.goldEachRound.ToString();
+        textArmyCount.text = GameplayManager.Instance.player.country.armyCount.ToString();
+        textManpower.text = GameplayManager.Instance.player.country.manpower.ToString();
     }
 }

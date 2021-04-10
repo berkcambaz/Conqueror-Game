@@ -10,7 +10,6 @@ public class Player
     {
         country = _country;
 
-
         for (int i = 0; i < UIManager.Instance.imageArmy.Length; ++i)
             UIManager.Instance.imageArmy[i].sprite = SpriteManager.Instance.armies[(int)country.id];
     }
