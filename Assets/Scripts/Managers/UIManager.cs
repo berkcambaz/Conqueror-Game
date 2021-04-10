@@ -101,7 +101,7 @@ public class UIManager : MonoBehaviour
     private void DisplayPanelBottom()
     {
         actionMoveArmy.SetActive((int)GameplayManager.Instance.player.country.id == (int)province.army.id);
-        actionRecruitArmy.SetActive(GameplayManager.Instance.player.country.id == province.country.id && province.army.id == ArmyID.None && province.landmarkID == LandmarkID.House);
+        actionRecruitArmy.SetActive(GameplayManager.Instance.player.country.id == province.country.id && province.army.id == ArmyID.None && province.landmark.id == LandmarkID.House);
         actionBuildChurch.SetActive(false);
         actionBuildHouse.SetActive(false);
         actionBuildTower.SetActive(false);

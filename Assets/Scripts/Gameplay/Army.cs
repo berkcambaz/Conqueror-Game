@@ -108,7 +108,7 @@ public class Army
                         }
 
                         // Add landmark bonuses for new province
-                        switch (_province.landmarkID)
+                        switch (_province.landmark.id)
                         {
                             case LandmarkID.Mountains:
                                 roll += -1;
@@ -120,15 +120,8 @@ public class Army
                                 break;
                         }
 
-                        // Add landmark bonuses for old province
-                        switch (oldProvince.landmarkID)
-                        {
-                            case LandmarkID.Forest:
-                                roll += 1;
-                                break;
-                            default:
-                                break;
-                        }
+                        roll += oldProvince.landmark.GetBonus(true);
+                        roll += _province.landmark.GetPenalty(true);
 
                         // If roll is higher than 5, clear the target province's army, and move ally army to target province
                         if (roll > 5)
@@ -137,6 +130,7 @@ public class Army
                             Move(ref _province, _tilePos, _tilePosOld, _mousePos, _mousePosOld);
                         }
 
+                        Debug.Log(roll);
                     }
                 }
             }

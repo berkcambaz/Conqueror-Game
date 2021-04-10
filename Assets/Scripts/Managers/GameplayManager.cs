@@ -57,7 +57,7 @@ public class GameplayManager : MonoBehaviour
     {
         string text = "";
 
-        switch (_province.landmarkID)
+        switch (_province.landmark.id)
         {
             case LandmarkID.None:
                 text = "- No Landmark";
