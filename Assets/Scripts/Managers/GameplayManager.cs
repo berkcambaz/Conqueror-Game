@@ -74,7 +74,9 @@ public class GameplayManager : MonoBehaviour
                 break;
             case LandmarkID.Church:
                 text = "- Church";
-                if (player.country.id == _province.countryID)
+
+                // If province is player's and nobody has occupied it, show demolish button
+                if (player.country.id == _province.countryID && _province.occupiedBycountry.id == CountryID.None)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
@@ -84,7 +86,9 @@ public class GameplayManager : MonoBehaviour
                 break;
             case LandmarkID.House:
                 text = "- House";
-                if (player.country.id == _province.countryID)
+
+                // If province is player's and nobody has occupied it, show demolish button
+                if (player.country.id == _province.countryID && _province.occupiedBycountry.id == CountryID.None)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
@@ -94,7 +98,9 @@ public class GameplayManager : MonoBehaviour
                 break;
             case LandmarkID.Tower:
                 text = "- Tower";
-                if (player.country.id == _province.countryID)
+
+                // If province is player's and nobody has occupied it, show demolish button
+                if (player.country.id == _province.countryID && _province.occupiedBycountry.id == CountryID.None)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
