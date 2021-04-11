@@ -3,10 +3,12 @@ using UnityEngine;
 public class Army
 {
     public ArmyID id;
+    public int lastActionRound;
 
-    public Army(ArmyID _id)
+    public Army(ArmyID _id, int _lastActionRound)
     {
         id = _id;
+        lastActionRound = _lastActionRound;
     }
 
     public void Move(ref Province _province, Vector2Int _tilePos, Vector2Int _tilePosOld, Vector2Int _mousePos, Vector2Int _mousePosOld)
@@ -15,6 +17,13 @@ public class Army
         {
             Vector2Int diff = _tilePos - _tilePosOld;
             ref Province oldProvince = ref Game.Instance.map.provinces[_tilePosOld.x + _tilePosOld.y * Game.Instance.map.width];
+
+            // The army has already done an action in this round or it's not player's turn, return
+            if (oldProvince.army.lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.ownTurn)
+                return;
+            else    // Set the last action round to current round
+                oldProvince.army.lastActionRound = GameplayManager.Instance.round;
+
             if (diff.x == 1 && diff.y == 0 && UIManager.Instance.armyMovementIndicatorRight.activeSelf
                 || diff.x == -1 && diff.y == 0 && UIManager.Instance.armyMovementIndicatorLeft.activeSelf
                 || diff.x == 0 && diff.y == 1 && UIManager.Instance.armyMovementIndicatorUp.activeSelf
@@ -26,11 +35,13 @@ public class Army
                     {
                         // Move army to new province
                         Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseArmy[(int)oldProvince.army.id]);
-                        _province.army.id = oldProvince.army.id;
+                        //_province.army.id = oldProvince.army.id;
+                        _province.army = new Army(oldProvince.army.id, oldProvince.army.lastActionRound);
 
                         // Remove army from old province
                         Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePosOld, null);
-                        oldProvince.army.id = ArmyID.None;
+                        //oldProvince.army.id = ArmyID.None;
+                        oldProvince.army = new Army(ArmyID.None, -1);
                     }
                     else if ((int)_province.army.id != (int)GameplayManager.Instance.player.country.id)   // If new province has army other than player's, fight
                     {
@@ -58,6 +69,13 @@ public class Army
 
     public void Occupy(ref Province _province, Vector2Int _tilePos, Vector2Int _mousePos)
     {
+        // The army has already done an action in this round or it's not player's turn, return
+        if (lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.ownTurn)
+            return;
+
+        // Set the last action round to current round
+        lastActionRound = GameplayManager.Instance.round;
+
         int roll = Dice.Roll();
 
         // Add bonuses and penalties to the roll

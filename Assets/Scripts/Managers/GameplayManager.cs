@@ -8,6 +8,7 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager Instance;
 
     public Player player;
+    public int round = 0;
 
     public void Init()
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player
 {
     public Country country;
+    public bool ownTurn = false;
 
     public Player(Country _country)
     {

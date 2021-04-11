@@ -14,6 +14,6 @@ public class Province
         countryID = _countryID;
         occupiedBycountry = new Country(CountryID.None);
         landmark = new Landmark(_landmarkID);
-        army = new Army(ArmyID.None);
+        army = new Army(ArmyID.None, -1);
     }
 }
