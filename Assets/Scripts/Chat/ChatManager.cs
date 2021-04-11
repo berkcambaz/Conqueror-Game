@@ -1,16 +1,24 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Chat : MonoBehaviour
+public class ChatManager : MonoBehaviour
 {
+    public static ChatManager Instance;
+
     public GameObject content;
 
     public GameObject prefabText;
     public InputField inputField;
     public int textCount;
     private List<string> texts = new List<string>();
+
+    public void Init()
+    {
+        Instance = this;
+    }
 
     public void OnEndEdit()
     {
@@ -29,8 +37,8 @@ public class Chat : MonoBehaviour
                     Destroy(content.transform.GetChild(0).gameObject);
                 }
 
-                GameObject textObj = Instantiate(prefabText, content.transform);
-                textObj.GetComponent<Text>().text = text;
+                // Show the text in the chat box
+                ShowText(text);
 
                 // Clear the message
                 inputField.text = "";
@@ -39,5 +47,19 @@ public class Chat : MonoBehaviour
             // Reactivate the input field
             inputField.ActivateInputField();
         }
+    }
+
+    public void ShowText(string _text)
+    {
+        GameObject textObj = Instantiate(prefabText, content.transform);
+        textObj.GetComponent<Text>().text = _text;
+    }
+
+    public void ShowText(string _text, Color _color)
+    {
+        GameObject textObj = Instantiate(prefabText, content.transform);
+        Text textComponent = textObj.GetComponent<Text>();
+        textComponent.text = _text;
+        textComponent.color = _color;
     }
 }

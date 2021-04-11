@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     public UIManager uiManager;
     public SpriteManager spriteManager;
     public GameplayManager gameplayManager;
+    public ChatManager chatManager;
 
     public Camera cam;
 
@@ -25,6 +26,7 @@ public class Game : MonoBehaviour
         uiManager.Init();
         spriteManager.Init();
         gameplayManager.Init();
+        chatManager.Init();
     }
 
     void Update()
