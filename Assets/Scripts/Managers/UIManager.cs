@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     private Vector2 panelTopAnchoredPosition;
     private bool panelTopOpened = false;
 
+    public GameObject endTurn;
+
     public GameObject panelBottom;
     public Text textProvince;
     public Text textLandmark;
@@ -158,7 +160,7 @@ public class UIManager : MonoBehaviour
 
     public void ButtonEnableArmyMovementIndicator()
     {
-        if (province.army.lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.ownTurn)
+        if (province.army.lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.GetTurn())
             return;
 
         armyMovementIndicator.transform.position = new Vector3(mousePos.x, mousePos.y, 0f);
@@ -230,5 +232,10 @@ public class UIManager : MonoBehaviour
             UpdateTopPanel();
             DisplayPanelBottom();
         }
+    }
+
+    public void ButtonEndTurn()
+    {
+        GameplayManager.Instance.player.SetTurn(false);
     }
 }

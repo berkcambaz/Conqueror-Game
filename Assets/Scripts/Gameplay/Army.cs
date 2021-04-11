@@ -19,7 +19,7 @@ public class Army
             ref Province oldProvince = ref Game.Instance.map.provinces[_tilePosOld.x + _tilePosOld.y * Game.Instance.map.width];
 
             // The army has already done an action in this round or it's not player's turn, return
-            if (oldProvince.army.lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.ownTurn)
+            if (oldProvince.army.lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.GetTurn())
                 return;
             else    // Set the last action round to current round
                 oldProvince.army.lastActionRound = GameplayManager.Instance.round;
@@ -71,7 +71,7 @@ public class Army
     public void Occupy(ref Province _province, Vector2Int _tilePos, Vector2Int _mousePos)
     {
         // The army has already done an action in this round or it's not player's turn, return
-        if (lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.ownTurn)
+        if (lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.GetTurn())
             return;
 
         // Set the last action round to current round
