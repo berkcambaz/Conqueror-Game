@@ -44,7 +44,7 @@ public class Landmark
                     return 2;
                 return 0;
             case LandmarkID.Forest:
-                return -1;
+                return 0;
             case LandmarkID.House:
                 if (!againstArmy)
                     return 1;

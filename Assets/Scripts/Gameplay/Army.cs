@@ -48,7 +48,7 @@ public class Army
                         int roll = Dice.Roll() - 1;
 
                         // Add bonuses and penalties to the roll
-                        int armyBonus = GetArmyBonus(_province, oldProvince, _tilePos);
+                        int armyBonus = GetArmyBonus(_province.army.id, oldProvince.army.id, _tilePos);
                         int landmarkBonus = oldProvince.landmark.GetBonus(true);
                         int landmarkPenalty = _province.landmark.GetPenalty(true);
 
@@ -71,6 +71,7 @@ public class Army
                         Debug.Log("Lanmark bonus: " + landmarkBonus);
                         Debug.Log("Landmark penalth: " + landmarkPenalty);
                         Debug.Log("Attack roll: " + roll);
+                        Debug.Log("Dice: " + (roll - armyBonus - landmarkBonus - landmarkPenalty + 1));
                     }
                 }
             }
@@ -86,7 +87,7 @@ public class Army
         int roll = Dice.Roll();
 
         // Add bonuses and penalties to the roll
-        int armyBonus = GetArmyBonus(_province, _province, _tilePos);
+        int armyBonus = GetArmyBonus(ArmyID.None, _province.army.id, _tilePos);
         int landmarkPenalty = _province.landmark.GetPenalty(true);
 
         roll += armyBonus + landmarkPenalty;
@@ -95,9 +96,19 @@ public class Army
         {
             if (_province.occupiedBycountryID != (CountryID)_province.army.id)
             {
-                _province.occupiedBycountryID = (CountryID)_province.army.id;
+                // If player re-occupies his/her province
+                if (_province.countryID == (CountryID)_province.army.id)
+                {
+                    _province.occupiedBycountryID = CountryID.None;
 
-                Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id + (int)ArmyID.Count]);
+                    Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id]);
+                }
+                else
+                {
+                    _province.occupiedBycountryID = (CountryID)_province.army.id;
+
+                    Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id + (int)ArmyID.Count]);
+                }
             }
             else
             {
@@ -115,45 +126,44 @@ public class Army
         Debug.Log("Army bonus: " + armyBonus);
         Debug.Log("Landmark penalty: " + landmarkPenalty);
         Debug.Log("Occupy roll: " + roll);
+        Debug.Log("Dice: " + (roll - armyBonus - landmarkPenalty));
     }
 
-    private int GetArmyBonus(Province _province, Province _oldProvince, Vector2Int _tilePos)
+    private int GetArmyBonus(ArmyID _enemyId, ArmyID _allyId, Vector2Int _tilePos)
     {
-        ArmyID enemyId = _province.army.id;
-        ArmyID allyId = _oldProvince.army.id;
         ArmyID landArmyId = ArmyID.None;
         int bonus = 0;
 
         if (!(_tilePos.x + 1 > Game.Instance.map.width - 1))
         {
             landArmyId = Game.Instance.map.provinces[(_tilePos.x + 1) + _tilePos.y * Game.Instance.map.width].army.id;
-            if (landArmyId == enemyId)
+            if (landArmyId == _enemyId)
                 bonus += -1;
-            else if (landArmyId == allyId)
+            else if (landArmyId == _allyId)
                 bonus += 1;
         }
         if (!(_tilePos.x - 1 < 0))
         {
             landArmyId = Game.Instance.map.provinces[(_tilePos.x - 1) + _tilePos.y * Game.Instance.map.width].army.id;
-            if (landArmyId == enemyId)
+            if (landArmyId == _enemyId)
                 bonus += -1;
-            else if (landArmyId == allyId)
+            else if (landArmyId == _allyId)
                 bonus += 1;
         }
         if (!(_tilePos.y + 1 > Game.Instance.map.height - 1))
         {
             landArmyId = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y + 1) * Game.Instance.map.width].army.id;
-            if (landArmyId == enemyId)
+            if (landArmyId == _enemyId)
                 bonus += -1;
-            else if (landArmyId == allyId)
+            else if (landArmyId == _allyId)
                 bonus += 1;
         }
         if (!(_tilePos.y - 1 < 0))
         {
             landArmyId = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y - 1) * Game.Instance.map.width].army.id;
-            if (landArmyId == enemyId)
+            if (landArmyId == _enemyId)
                 bonus += -1;
-            else if (landArmyId == allyId)
+            else if (landArmyId == _allyId)
                 bonus += 1;
         }
 
