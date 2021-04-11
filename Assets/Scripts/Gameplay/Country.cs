@@ -21,7 +21,7 @@ public class Country
     }
 
 
-    public void AddLandmark(LandmarkID _landmarkID)
+    public void AddLandmark(LandmarkID _landmarkID, bool _mapInitialized)
     {
         switch (_landmarkID)
         {
@@ -30,8 +30,9 @@ public class Country
             case LandmarkID.Capital:
                 break;
             case LandmarkID.Church:
-                ++gold;
                 ++goldEachRound;
+                if (!_mapInitialized)
+                    ++gold;
                 break;
             case LandmarkID.Forest:
                 break;

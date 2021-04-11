@@ -60,7 +60,7 @@ public class Map : MonoBehaviour
                     if (tilebaseLandmarks[i] == tilebaseLandmarksAll[x + y * width])
                     {
                         landmarkID = (LandmarkID)(i % (int)LandmarkID.Count);
-                        Game.Instance.countries[(int)countryID].AddLandmark(landmarkID);
+                        Game.Instance.countries[(int)countryID].AddLandmark(landmarkID, false);
                         break;
                     }
                 }
