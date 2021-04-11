@@ -52,6 +52,9 @@ public class Country
 
     public bool BuyLandmark(LandmarkID _id, ref Province _province, Vector2Int _mousePos)
     {
+        if (!CanDoAction(_province))
+            return false;
+
         bool landmarkPurchased = true;
 
         switch (_id)
@@ -96,8 +99,11 @@ public class Country
         return landmarkPurchased;
     }
 
-    public void RemoveLandmark(ref Province _province, Vector2Int _mousePos)
+    public bool RemoveLandmark(ref Province _province, Vector2Int _mousePos)
     {
+        if (!CanDoAction(_province))
+            return false;
+
         switch (_province.landmark.id)
         {
             case LandmarkID.Church:
@@ -112,6 +118,8 @@ public class Country
 
         _province.landmark.id = LandmarkID.None;
         Game.Instance.map.tilemapLandmarks.SetTile((Vector3Int)_mousePos, null);
+
+        return true;
     }
 
     public void AddArmy()
@@ -121,6 +129,9 @@ public class Country
 
     public bool BuyArmy(ref Province _province, Vector2Int _mousePos)
     {
+        if (!CanDoAction(_province))
+            return false;
+
         bool armyPurchased = false;
 
         if (manpower >= armyCount + 1 && gold >= 2)
@@ -142,6 +153,25 @@ public class Country
     public void RemoveArmy(int _x, int _y)
     {
 
+    }
+
+    public bool CanDoAction(Province _province)
+    {
+        bool canDoAction = true;
+
+        // If province is occupied by another country, player can't buy landmark
+        if (_province.occupiedBycountryID != CountryID.None)
+            canDoAction= false;
+
+        // If not player's turn, player can't buy landmark
+        if (!GameplayManager.Instance.player.GetTurn())
+            canDoAction = false;
+
+        // If an enemy army is on the province, player can't buy landmark
+        if ((int)_province.army.id != (int)GameplayManager.Instance.player.country.id && _province.army.id != ArmyID.None)
+            canDoAction = false;
+
+        return canDoAction;
     }
 }
 

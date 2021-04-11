@@ -35,7 +35,7 @@ public class GameplayManager : MonoBehaviour
                 break;
         }
 
-        switch (_province.occupiedBycountry.id)
+        switch (_province.occupiedBycountryID)
         {
             case CountryID.Green:
                 text += " (Occupied by Green)";
@@ -77,7 +77,7 @@ public class GameplayManager : MonoBehaviour
                 text = "- Church";
 
                 // If province is player's and nobody has occupied it, show demolish button
-                if (player.country.id == _province.countryID && _province.occupiedBycountry.id == CountryID.None)
+                if (player.country.id == _province.countryID && _province.occupiedBycountryID == CountryID.None)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
@@ -89,7 +89,7 @@ public class GameplayManager : MonoBehaviour
                 text = "- House";
 
                 // If province is player's and nobody has occupied it, show demolish button
-                if (player.country.id == _province.countryID && _province.occupiedBycountry.id == CountryID.None)
+                if (player.country.id == _province.countryID && _province.occupiedBycountryID == CountryID.None)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }
@@ -101,7 +101,7 @@ public class GameplayManager : MonoBehaviour
                 text = "- Tower";
 
                 // If province is player's and nobody has occupied it, show demolish button
-                if (player.country.id == _province.countryID && _province.occupiedBycountry.id == CountryID.None)
+                if (player.country.id == _province.countryID && _province.occupiedBycountryID == CountryID.None)
                 {
                     UIManager.Instance.actionDemolish.SetActive(true);
                 }

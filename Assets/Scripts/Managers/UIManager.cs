@@ -225,10 +225,9 @@ public class UIManager : MonoBehaviour
 
     public void ButtonDemolish()
     {
-        // If land is not occupied by other countries, demolish the landmark
-        if (province.occupiedBycountry.id == CountryID.None)
+        bool demolished = Game.Instance.countries[(int)province.countryID].RemoveLandmark(ref province, mousePos);
+        if (demolished)
         {
-            Game.Instance.countries[(int)province.countryID].RemoveLandmark(ref province, mousePos);
             UpdateTopPanel();
             DisplayPanelBottom();
         }

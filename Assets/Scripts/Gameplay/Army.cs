@@ -86,16 +86,16 @@ public class Army
 
         if (roll > 5)
         {
-            if (_province.occupiedBycountry.id != (CountryID)_province.army.id)
+            if (_province.occupiedBycountryID != (CountryID)_province.army.id)
             {
-                _province.occupiedBycountry.id = (CountryID)_province.army.id;
+                _province.occupiedBycountryID = (CountryID)_province.army.id;
 
                 Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id + (int)ArmyID.Count]);
             }
             else
             {
                 _province.countryID = (CountryID)_province.army.id;
-                _province.occupiedBycountry.id = CountryID.None;
+                _province.occupiedBycountryID = CountryID.None;
                 Game.Instance.countries[(int)_province.countryID].AddLandmark(_province.landmark.id, true);
 
                 Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id]);
