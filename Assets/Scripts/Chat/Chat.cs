@@ -11,7 +11,7 @@ public class Chat : MonoBehaviour
     public InputField inputField;
     public int textCount;
     private List<string> texts = new List<string>();
-    
+
     public void OnEndEdit()
     {
         // If clicked to enter or keypad enter

@@ -140,7 +140,7 @@ public class GameplayManager : MonoBehaviour
     public bool ShowArmyMovementIndicatorCenter(Vector2Int _tilePos)
     {
         Province centerProvince = Game.Instance.map.provinces[_tilePos.x + _tilePos.y * Game.Instance.map.width];
-        bool show = centerProvince.countryID != player.country.id && (int)centerProvince.army.id == (int)player.country.id;
+        bool show = (int)centerProvince.occupiedBycountryID != (int)ArmyID.None || (centerProvince.countryID != player.country.id && (int)centerProvince.army.id == (int)player.country.id);
         return show;
     }
 

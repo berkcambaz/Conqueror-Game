@@ -21,8 +21,6 @@ public class Army
             // The army has already done an action in this round or it's not player's turn, return
             if (oldProvince.army.lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.GetTurn())
                 return;
-            else    // Set the last action round to current round
-                oldProvince.army.lastActionRound = GameplayManager.Instance.round;
 
             if (diff.x == 1 && diff.y == 0 && UIManager.Instance.armyMovementIndicatorRight.activeSelf
                 || diff.x == -1 && diff.y == 0 && UIManager.Instance.armyMovementIndicatorLeft.activeSelf
@@ -40,6 +38,9 @@ public class Army
                         // Remove army from old province
                         Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePosOld, null);
                         oldProvince.army = new Army(ArmyID.None, -1);
+
+                        // Set the last action round to current round
+                        oldProvince.army.lastActionRound = GameplayManager.Instance.round;
                     }
                     else if ((int)_province.army.id != (int)GameplayManager.Instance.player.country.id)   // If new province has army other than player's, fight
                     {
@@ -61,6 +62,9 @@ public class Army
                             Move(ref _province, _tilePos, _tilePosOld, _mousePos, _mousePosOld);
                         }
 
+                        // Set the last action round to current round
+                        oldProvince.army.lastActionRound = GameplayManager.Instance.round;
+
                         Debug.Log("Attack roll: " + roll);
                     }
                 }
@@ -73,9 +77,6 @@ public class Army
         // The army has already done an action in this round or it's not player's turn, return
         if (lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.GetTurn())
             return;
-
-        // Set the last action round to current round
-        lastActionRound = GameplayManager.Instance.round;
 
         int roll = Dice.Roll();
 
@@ -100,6 +101,9 @@ public class Army
 
                 Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id]);
             }
+
+            // Set the last action round to current round
+            lastActionRound = GameplayManager.Instance.round;
         }
 
         Debug.Log("Occupy roll: " + roll);

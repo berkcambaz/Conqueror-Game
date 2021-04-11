@@ -29,7 +29,7 @@ public class Landmark
                 return 0;
         }
     }
-
+    
     public int GetPenalty(bool againstArmy)
     {
 

@@ -92,7 +92,10 @@ public class Map : MonoBehaviour
         // Initialize player as green country and update top panel after initializing player with a country
         GameplayManager.Instance.player = new Player(Game.Instance.countries[(int)CountryID.Red]);
         GameplayManager.Instance.player.SetTurn(true);
+
         provinces[2].occupiedBycountryID = CountryID.Yellow;
+        tilemapProvince.SetTile(new Vector3Int(-4, -5, 0), tilebaseProvince[(int)CountryID.Yellow + (int)CountryID.Count]);
+
         UIManager.Instance.UpdateTopPanel();
     }
 
