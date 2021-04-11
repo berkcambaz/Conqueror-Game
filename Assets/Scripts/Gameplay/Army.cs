@@ -54,7 +54,7 @@ public class Army
                         // If roll is higher than 5, clear the target province's army, and move ally army to target province
                         if (roll > 5)
                         {
-                            // Subtract 1 from last action round to allow army to move to the land of the killed enemy
+                            // Subtract 1 from last action round to allow army to move to the province of the killed army
                             oldProvince.army.lastActionRound += -1;
 
                             _province.army.id = ArmyID.None;

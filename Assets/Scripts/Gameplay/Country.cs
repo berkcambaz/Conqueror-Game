@@ -130,7 +130,7 @@ public class Country
             ++armyCount;
 
             // Place army to x, y position
-            _province.army.id = (ArmyID)_province.countryID;
+            _province.army = new Army((ArmyID)_province.countryID, GameplayManager.Instance.round);
             Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseArmy[(int)_province.army.id]);
 
             armyPurchased = true;

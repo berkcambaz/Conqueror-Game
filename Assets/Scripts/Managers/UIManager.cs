@@ -158,6 +158,9 @@ public class UIManager : MonoBehaviour
 
     public void ButtonEnableArmyMovementIndicator()
     {
+        if (province.army.lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.ownTurn)
+            return;
+
         armyMovementIndicator.transform.position = new Vector3(mousePos.x, mousePos.y, 0f);
         armyMovementIndicator.SetActive(!armyMovementIndicator.activeSelf);
 
