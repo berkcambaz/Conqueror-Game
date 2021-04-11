@@ -35,12 +35,10 @@ public class Army
                     {
                         // Move army to new province
                         Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseArmy[(int)oldProvince.army.id]);
-                        //_province.army.id = oldProvince.army.id;
                         _province.army = new Army(oldProvince.army.id, oldProvince.army.lastActionRound);
 
                         // Remove army from old province
                         Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePosOld, null);
-                        //oldProvince.army.id = ArmyID.None;
                         oldProvince.army = new Army(ArmyID.None, -1);
                     }
                     else if ((int)_province.army.id != (int)GameplayManager.Instance.player.country.id)   // If new province has army other than player's, fight
@@ -56,6 +54,9 @@ public class Army
                         // If roll is higher than 5, clear the target province's army, and move ally army to target province
                         if (roll > 5)
                         {
+                            // Subtract 1 from last action round to allow army to move to the land of the killed enemy
+                            oldProvince.army.lastActionRound += -1;
+
                             _province.army.id = ArmyID.None;
                             Move(ref _province, _tilePos, _tilePosOld, _mousePos, _mousePosOld);
                         }
