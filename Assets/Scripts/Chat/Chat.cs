@@ -8,21 +8,35 @@ public class Chat : MonoBehaviour
     public GameObject content;
 
     public GameObject prefabText;
-
     public InputField inputField;
+    public int textCount;
+    private List<string> texts = new List<string>();
     
     public void OnEndEdit()
     {
-        // If clicked to enter or keypad enter, send the message, clear and activate the inputfield
+        // If clicked to enter or keypad enter
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            string text = inputField.text;
+            // If text is not empty
+            if (inputField.text.Trim() != "")
+            {
+                string text = inputField.text.Trim();
 
-            GameObject textObj = Instantiate(prefabText, content.transform);
-            textObj.GetComponent<Text>().text = text;
+                texts.Add(text);
+                if (texts.Count > textCount)
+                {
+                    texts.RemoveAt(0);
+                    Destroy(content.transform.GetChild(0).gameObject);
+                }
 
-            // Clear the message and activate input field 
-            inputField.text = "";
+                GameObject textObj = Instantiate(prefabText, content.transform);
+                textObj.GetComponent<Text>().text = text;
+
+                // Clear the message
+                inputField.text = "";
+            }
+
+            // Reactivate the input field
             inputField.ActivateInputField();
         }
     }

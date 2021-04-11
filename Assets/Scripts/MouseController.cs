@@ -21,7 +21,6 @@ public class MouseController : MonoBehaviour
         Vector2 targetTile = Game.Instance.cam.ScreenToWorldPoint(Input.mousePosition);
         UIManager.Instance.tileSelect.transform.position = new Vector3(Mathf.RoundToInt(targetTile.x - 0.5f), Mathf.RoundToInt(targetTile.y - 0.5f), 0f);
 
-        scroll = Mathf.Clamp(scroll + -Input.GetAxis("Mouse ScrollWheel") * scrollSpeed, zoomMin, zoomMax);
         Game.Instance.cam.orthographicSize = Mathf.Clamp(Mathf.Lerp(Game.Instance.cam.orthographicSize, scroll, Time.deltaTime * 5f), zoomMin, zoomMax);
     }
 
@@ -59,5 +58,10 @@ public class MouseController : MonoBehaviour
         }
         mouseMoved = false;
         StopCoroutine("OnPointerMove");
+    }
+
+    public void OnScroll()
+    {
+        scroll = Mathf.Clamp(scroll + -Input.GetAxis("Mouse ScrollWheel") * scrollSpeed, zoomMin, zoomMax);
     }
 }

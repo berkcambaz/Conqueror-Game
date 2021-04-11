@@ -8823,6 +8823,7 @@ MonoBehaviour:
   content: {fileID: 2017663615}
   prefabText: {fileID: 4433717989866079747, guid: d0905df96b1ef164ebf74e3b7254c240, type: 3}
   inputField: {fileID: 1533194154}
+  textCount: 25
 --- !u!1 &2126021222
 GameObject:
   m_ObjectHideFlags: 0
