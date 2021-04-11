@@ -31,6 +31,9 @@ public class Army
                 {
                     if (_province.army.id == ArmyID.None)    // If new province is empty, move army to new province
                     {
+                        // Set the last action round to current round
+                        oldProvince.army.lastActionRound = GameplayManager.Instance.round;
+
                         // Move army to new province
                         Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseArmy[(int)oldProvince.army.id]);
                         _province.army = new Army(oldProvince.army.id, oldProvince.army.lastActionRound);
@@ -38,9 +41,6 @@ public class Army
                         // Remove army from old province
                         Game.Instance.map.tilemapArmy.SetTile((Vector3Int)_mousePosOld, null);
                         oldProvince.army = new Army(ArmyID.None, -1);
-
-                        // Set the last action round to current round
-                        oldProvince.army.lastActionRound = GameplayManager.Instance.round;
                     }
                     else if ((int)_province.army.id != (int)GameplayManager.Instance.player.country.id)   // If new province has army other than player's, fight
                     {
@@ -48,9 +48,11 @@ public class Army
                         int roll = Dice.Roll() - 1;
 
                         // Add bonuses and penalties to the roll
-                        roll += GetArmyBonus(_province, oldProvince, _tilePos);
-                        roll += oldProvince.landmark.GetBonus(true);
-                        roll += _province.landmark.GetPenalty(true);
+                        int armyBonus = GetArmyBonus(_province, oldProvince, _tilePos);
+                        int landmarkBonus = oldProvince.landmark.GetBonus(true);
+                        int landmarkPenalty = _province.landmark.GetPenalty(true);
+
+                        roll += armyBonus + landmarkBonus + landmarkPenalty;
 
                         // If roll is higher than 5, clear the target province's army, and move ally army to target province
                         if (roll > 5)
@@ -65,6 +67,9 @@ public class Army
                         // Set the last action round to current round
                         oldProvince.army.lastActionRound = GameplayManager.Instance.round;
 
+                        Debug.Log("Army bonus: " + armyBonus);
+                        Debug.Log("Lanmark bonus: " + landmarkBonus);
+                        Debug.Log("Landmark penalth: " + landmarkPenalty);
                         Debug.Log("Attack roll: " + roll);
                     }
                 }
@@ -81,9 +86,10 @@ public class Army
         int roll = Dice.Roll();
 
         // Add bonuses and penalties to the roll
-        roll += GetArmyBonus(_province, _province, _tilePos);
-        roll += _province.landmark.GetBonus(true);
-        roll += _province.landmark.GetPenalty(true);
+        int armyBonus = GetArmyBonus(_province, _province, _tilePos);
+        int landmarkPenalty = _province.landmark.GetPenalty(true);
+
+        roll += armyBonus + landmarkPenalty;
 
         if (roll > 5)
         {
@@ -106,12 +112,14 @@ public class Army
             lastActionRound = GameplayManager.Instance.round;
         }
 
+        Debug.Log("Army bonus: " + armyBonus);
+        Debug.Log("Landmark penalty: " + landmarkPenalty);
         Debug.Log("Occupy roll: " + roll);
     }
 
     private int GetArmyBonus(Province _province, Province _oldProvince, Vector2Int _tilePos)
     {
-        ArmyID enemyId = (ArmyID)_province.countryID;
+        ArmyID enemyId = _province.army.id;
         ArmyID allyId = _oldProvince.army.id;
         ArmyID landArmyId = ArmyID.None;
         int bonus = 0;
