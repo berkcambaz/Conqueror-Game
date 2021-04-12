@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using System.Net;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,15 @@ public class UIManager : MonoBehaviour
     public GameObject armyMovementIndicatorRight;
     public GameObject tileSelect;
     public GameObject tileShadow;
+
+    public Canvas canvasMenu;
+    public Canvas canvasHost;
+    public InputField inputFieldHostPort;
+    public Button buttonHost;
+    public Canvas canvasJoin;
+    public InputField inputFieldJoinIPAddress;
+    public InputField inputFieldJoinPort;
+    public Button buttonJoin;
 
     public GameObject panelTop;
     public Text textGold;
@@ -236,5 +246,70 @@ public class UIManager : MonoBehaviour
     public void ButtonEndTurn()
     {
         GameplayManager.Instance.player.SetTurn(false);
+    }
+
+    public void ButtonHostMenu()
+    {
+        canvasMenu.gameObject.SetActive(false);
+        canvasHost.gameObject.SetActive(true);
+    }
+
+    public void ButtonJoinMenu()
+    {
+        canvasMenu.gameObject.SetActive(false);
+        canvasJoin.gameObject.SetActive(true);
+    }
+
+    public void ButtonGoBack()
+    {
+        canvasMenu.gameObject.SetActive(true);
+        canvasHost.gameObject.SetActive(false);
+        canvasJoin.gameObject.SetActive(false);
+    }
+
+    public void ButtonHost()
+    {
+        buttonHost.interactable = false;
+
+        int port;
+        try
+        {
+            port = int.Parse(inputFieldHostPort.text);
+        }
+        catch (Exception)
+        {
+            buttonHost.interactable = true;
+            return;
+        }
+
+        if (Server.Server.Start(4, port))
+        {
+            // Enable game UI and map
+        }
+
+        buttonHost.interactable = true;
+    }
+
+    public void ButtonJoin()
+    {
+        buttonHost.interactable = false;
+
+        IPAddress ipAddress;
+        int port;
+
+        try
+        {
+            ipAddress = IPAddress.Parse(inputFieldJoinIPAddress.text);
+            port = int.Parse(inputFieldJoinPort.text);
+        }
+        catch (Exception)
+        {
+
+            buttonHost.interactable = true;
+            return;
+        }
+
+
+        Client.Client.Connect(ipAddress, port);
     }
 }

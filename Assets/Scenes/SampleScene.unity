@@ -1118,7 +1118,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 220308027}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592184418}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonHost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &220308027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2531,6 +2543,14 @@ MonoBehaviour:
   armyMovementIndicatorRight: {fileID: 1167857411}
   tileSelect: {fileID: 1056258574}
   tileShadow: {fileID: 446449399}
+  canvasMenu: {fileID: 1640396701}
+  canvasHost: {fileID: 1400689241}
+  inputFieldHostPort: {fileID: 1870568855}
+  buttonHost: {fileID: 220308026}
+  canvasJoin: {fileID: 1047300243}
+  inputFieldJoinIPAddress: {fileID: 1051462321}
+  inputFieldJoinPort: {fileID: 607556086}
+  buttonJoin: {fileID: 1100116502}
   panelTop: {fileID: 2024332106}
   textGold: {fileID: 229508509}
   textGoldEarned: {fileID: 686938260}
@@ -3781,7 +3801,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 909134805}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592184418}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonJoinMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &909134805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4073,7 +4105,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 935060789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592184418}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonGoBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &935060789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4710,7 +4754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1047300241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5102,7 +5146,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1100116503}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592184418}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonJoin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1100116503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5534,7 +5590,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1174135984}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592184418}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonGoBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1174135984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8642,7 +8710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1640396699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10718,7 +10786,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1954667053}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592184418}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ButtonHostMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1954667053
 MonoBehaviour:
   m_ObjectHideFlags: 0

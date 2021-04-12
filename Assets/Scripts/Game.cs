@@ -28,9 +28,4 @@ public class Game : MonoBehaviour
         gameplayManager.Init();
         chatManager.Init();
     }
-
-    void Update()
-    {
-
-    }
 }
