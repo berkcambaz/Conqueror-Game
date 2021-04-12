@@ -137,7 +137,7 @@ public class Army
         if (!(_tilePos.x + 1 > Game.Instance.map.width - 1))
         {
             landArmyId = Game.Instance.map.provinces[(_tilePos.x + 1) + _tilePos.y * Game.Instance.map.width].army.id;
-            if (landArmyId == _enemyId)
+            if (_enemyId != ArmyID.None && landArmyId == _enemyId)
                 bonus += -1;
             else if (landArmyId == _allyId)
                 bonus += 1;
@@ -145,7 +145,7 @@ public class Army
         if (!(_tilePos.x - 1 < 0))
         {
             landArmyId = Game.Instance.map.provinces[(_tilePos.x - 1) + _tilePos.y * Game.Instance.map.width].army.id;
-            if (landArmyId == _enemyId)
+            if (_enemyId != ArmyID.None && landArmyId == _enemyId)
                 bonus += -1;
             else if (landArmyId == _allyId)
                 bonus += 1;
@@ -153,7 +153,7 @@ public class Army
         if (!(_tilePos.y + 1 > Game.Instance.map.height - 1))
         {
             landArmyId = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y + 1) * Game.Instance.map.width].army.id;
-            if (landArmyId == _enemyId)
+            if (_enemyId != ArmyID.None && landArmyId == _enemyId)
                 bonus += -1;
             else if (landArmyId == _allyId)
                 bonus += 1;
@@ -161,7 +161,7 @@ public class Army
         if (!(_tilePos.y - 1 < 0))
         {
             landArmyId = Game.Instance.map.provinces[_tilePos.x + (_tilePos.y - 1) * Game.Instance.map.width].army.id;
-            if (landArmyId == _enemyId)
+            if (_enemyId != ArmyID.None && landArmyId == _enemyId)
                 bonus += -1;
             else if (landArmyId == _allyId)
                 bonus += 1;
