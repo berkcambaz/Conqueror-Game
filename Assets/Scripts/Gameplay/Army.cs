@@ -84,6 +84,9 @@ public class Army
         if (lastActionRound == GameplayManager.Instance.round || !GameplayManager.Instance.player.GetTurn())
             return;
 
+        // Set the last action round to current round
+        lastActionRound = GameplayManager.Instance.round;
+
         int roll = Dice.Roll();
 
         // Add bonuses and penalties to the roll
@@ -118,9 +121,6 @@ public class Army
 
                 Game.Instance.map.tilemapProvince.SetTile((Vector3Int)_mousePos, Game.Instance.map.tilebaseProvince[(int)_province.army.id]);
             }
-
-            // Set the last action round to current round
-            lastActionRound = GameplayManager.Instance.round;
         }
 
         Debug.Log("Army bonus: " + armyBonus);
