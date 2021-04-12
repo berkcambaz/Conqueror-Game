@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ServerPacket
 {
+    public const int WELCOME = 0;
+
     private static void SendTCPData(int _toClient, Packet _packet)
     {
         Server.Server.clients[_toClient].tcp.SendData(_packet);
@@ -34,11 +36,27 @@ public class ServerPacket
         int id = _packet.ReadInt();
         switch (id)
         {
+            case WELCOME:
+                HandleWelcome(_packet);
+                break;
             default:
                 break;
         }
     }
 
     #region Packets
+    public static void SendWelcome(int _toClient)
+    {
+        Packet packet = new Packet(WELCOME);
+        SendTCPData(_toClient, packet);
+    }
+    
+    private static void HandleWelcome(Packet _packet)
+    {
+        // Disable join menu and enable game UI and map
+        UIManager.Instance.canvasJoin.gameObject.SetActive(false);
+        UIManager.Instance.canvasGameUI.gameObject.SetActive(true);
+        Game.Instance.map.gameObject.SetActive(true);
+    }
     #endregion
 }

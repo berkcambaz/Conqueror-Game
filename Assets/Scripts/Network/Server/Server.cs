@@ -38,7 +38,7 @@ namespace Server
                 return false;
             }
 
-            Debug.Log($"Server started on port {port}.");
+            Debug.Log($"Server started on port {port}...");
             return true;
         }
 

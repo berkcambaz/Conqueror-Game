@@ -45,7 +45,8 @@ namespace Server
 
             stream.BeginRead(buffer, 0, bufferSize, ReceiveCallback, null);
 
-            // Send login packet to client
+            // Send welcome packet to client
+            ServerPacket.SendWelcome(id);
         }
 
         public void SendData(Packet _packet)

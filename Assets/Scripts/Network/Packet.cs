@@ -65,10 +65,10 @@ public class Packet
     }
     #endregion
 
-    #region Read Data
+    #region Read
     public byte ReadByte()
     {
-        if (readPos + 1 < readableBuffer.Length)
+        if (readPos + 1 < readableBuffer.Length + 1)
         {
             byte value = readableBuffer[readPos];
             readPos += 1;
@@ -82,7 +82,7 @@ public class Packet
 
     public byte[] ReadBytes(int _length)
     {
-        if (readPos + _length < readableBuffer.Length)
+        if (readPos + _length < readableBuffer.Length + 1)
         {
             byte[] value = buffer.GetRange(readPos, _length).ToArray();
             readPos += _length;
@@ -96,7 +96,7 @@ public class Packet
 
     public int ReadInt()
     {
-        if (readPos + 4 < readableBuffer.Length)
+        if (readPos + 4 < readableBuffer.Length + 1)
         {
             int value = BitConverter.ToInt32(readableBuffer, readPos);
             readPos += 4;
@@ -110,7 +110,7 @@ public class Packet
 
     public bool ReadBool()
     {
-        if (readPos + 1 < readableBuffer.Length)
+        if (readPos + 1 < readableBuffer.Length + 1)
         {
             bool value = BitConverter.ToBoolean(readableBuffer, readPos);
             readPos += 1;

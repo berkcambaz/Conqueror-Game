@@ -286,7 +286,8 @@ public class UIManager : MonoBehaviour
 
         if (Server.Server.Start(4, port))
         {
-            // Enable game UI and map
+            // Disable host menu and enable game UI and map
+            canvasHost.gameObject.SetActive(false);
             canvasGameUI.gameObject.SetActive(true);
             Game.Instance.map.gameObject.SetActive(true);
         }
@@ -296,7 +297,7 @@ public class UIManager : MonoBehaviour
 
     public void ButtonJoin()
     {
-        buttonHost.interactable = false;
+        buttonJoin.interactable = false;
 
         IPAddress ipAddress;
         int port;
@@ -309,7 +310,7 @@ public class UIManager : MonoBehaviour
         catch (Exception)
         {
 
-            buttonHost.interactable = true;
+            buttonJoin.interactable = true;
             return;
         }
 

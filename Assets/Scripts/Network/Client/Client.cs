@@ -19,7 +19,7 @@ namespace Client
         public static void Disconnect()
         {
             tcp.socket.Close();
-            Debug.Log("Disconnected from server.");
+            Debug.Log("Disconnected from server...");
         }
     }
 
@@ -66,7 +66,6 @@ namespace Client
             }
         }
 
-        /// <summary>Reads incoming data from the stream.</summary>
         private void ReceiveCallback(IAsyncResult _result)
         {
             try
