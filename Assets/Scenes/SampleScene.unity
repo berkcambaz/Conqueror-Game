@@ -2551,6 +2551,7 @@ MonoBehaviour:
   inputFieldJoinIPAddress: {fileID: 1051462321}
   inputFieldJoinPort: {fileID: 607556086}
   buttonJoin: {fileID: 1100116502}
+  canvasGameUI: {fileID: 677110724}
   panelTop: {fileID: 2024332106}
   textGold: {fileID: 229508509}
   textGoldEarned: {fileID: 686938260}
