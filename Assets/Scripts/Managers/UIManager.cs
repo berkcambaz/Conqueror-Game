@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
     public InputField inputFieldJoinPort;
     public Button buttonJoin;
 
+    public Canvas canvasGameUI;
+
     public GameObject panelTop;
     public Text textGold;
     public Text textGoldEarned;
@@ -285,6 +287,8 @@ public class UIManager : MonoBehaviour
         if (Server.Server.Start(4, port))
         {
             // Enable game UI and map
+            canvasGameUI.gameObject.SetActive(true);
+            Game.Instance.map.gameObject.SetActive(true);
         }
 
         buttonHost.interactable = true;
